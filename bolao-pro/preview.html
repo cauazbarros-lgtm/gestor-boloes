@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BolãoPro — Preview Visual</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          brasil: {
+            verde: '#009C3B',
+            'verde-escuro': '#00782D',
+            'verde-claro': '#00C04A',
+            amarelo: '#FFDF00',
+            'amarelo-escuro': '#E5C800',
+          },
+          admin: {
+            bg: '#0B1320',
+            surface: '#111A2E',
+            border: '#1F2A44',
+          },
+        },
+        fontFamily: {
+          sans: ['Inter', 'system-ui', 'sans-serif'],
+          display: ['Poppins', 'Inter', 'sans-serif'],
+        },
+      },
+    },
+  };
+</script>
+<style>
+  body { font-family: 'Inter', system-ui, sans-serif; }
+  h1, h2, h3 { font-family: 'Poppins', 'Inter', sans-serif; }
+  .tab-active { border-bottom-color: #009C3B; color: #009C3B; font-weight: 700; }
+  .palpite-ativo { background: #009C3B; color: white; border-color: #009C3B; transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,156,59,0.3); }
+</style>
+</head>
+<body class="bg-gray-50">
+
+<!-- Aviso de preview -->
+<div class="bg-amber-100 border-b-2 border-amber-300 text-amber-900 px-4 py-2 text-center text-sm">
+  ⚠️ <strong>Preview visual estático</strong> — apenas para mostrar como ficou o design. Para a versão funcional, siga o README e rode <code class="bg-amber-200 px-1.5 py-0.5 rounded">npm run dev</code> ou publique na Vercel.
+</div>
+
+<!-- Abas -->
+<div class="bg-white border-b border-gray-200 sticky top-0 z-30">
+  <div class="max-w-5xl mx-auto px-4 flex gap-6 overflow-x-auto">
+    <button onclick="showTab('publica')" id="tab-publica" class="py-3 px-1 border-b-2 border-transparent text-sm tab-active whitespace-nowrap">
+      🏆 Página pública do bolão
+    </button>
+    <button onclick="showTab('cota')" id="tab-cota" class="py-3 px-1 border-b-2 border-transparent text-sm text-gray-500 whitespace-nowrap">
+      🎟️ Comprovante de cota
+    </button>
+    <button onclick="showTab('admin')" id="tab-admin" class="py-3 px-1 border-b-2 border-transparent text-sm text-gray-500 whitespace-nowrap">
+      🛠 Dashboard admin
+    </button>
+    <button onclick="showTab('apostas')" id="tab-apostas" class="py-3 px-1 border-b-2 border-transparent text-sm text-gray-500 whitespace-nowrap">
+      📋 Tabela de apostas
+    </button>
+  </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 1: PÁGINA PÚBLICA DO BOLÃO                                 -->
+<!-- ============================================================ -->
+<div id="view-publica">
+<main class="min-h-screen bg-gray-50">
+  <!-- Hero -->
+  <header class="relative overflow-hidden bg-gradient-to-br from-brasil-verde via-brasil-verde-escuro to-emerald-900 text-white">
+    <div class="absolute inset-0 opacity-10">
+      <div class="absolute -top-20 -right-20 w-80 h-80 bg-brasil-amarelo rounded-full blur-3xl"></div>
+      <div class="absolute -bottom-20 -left-20 w-80 h-80 bg-white rounded-full blur-3xl"></div>
+    </div>
+
+    <div class="relative max-w-3xl mx-auto px-4 py-8 md:py-12">
+      <div class="inline-flex items-center gap-2 bg-brasil-amarelo text-gray-900 px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide mb-3">
+        🏆 Rodada 15
+      </div>
+      <h1 class="font-display text-3xl md:text-4xl font-bold mb-2 leading-tight">
+        Bolão Rodada 15 — Brasileirão 2025
+      </h1>
+      <p class="text-white/80 text-sm md:text-base mb-6 max-w-xl">
+        Acerte os 10 resultados da rodada e fature o prêmio acumulado!
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mt-6">
+        <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20">
+          <div class="text-brasil-amarelo text-xs font-bold uppercase mb-1">🏆 Prêmio acumulado</div>
+          <div class="text-2xl md:text-3xl font-bold tabular-nums">R$ 2.450,00</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20">
+          <div class="text-brasil-amarelo text-xs font-bold uppercase mb-1">🎟 Valor da cota</div>
+          <div class="text-2xl md:text-3xl font-bold tabular-nums">R$ 20,00</div>
+        </div>
+        <div class="bg-white/10 backdrop-blur rounded-xl p-4 border border-white/20">
+          <div class="text-brasil-amarelo text-xs font-bold uppercase mb-2">Apostas até</div>
+          <div class="inline-flex items-center gap-2">
+            <div class="flex gap-1.5">
+              <div class="flex flex-col items-center bg-white/20 rounded-lg px-3 py-2 min-w-[60px]">
+                <span class="text-2xl font-bold tabular-nums">02</span>
+                <span class="text-[10px] uppercase opacity-80">dias</span>
+              </div>
+              <div class="flex flex-col items-center bg-white/20 rounded-lg px-3 py-2 min-w-[60px]">
+                <span class="text-2xl font-bold tabular-nums">14</span>
+                <span class="text-[10px] uppercase opacity-80">horas</span>
+              </div>
+              <div class="flex flex-col items-center bg-white/20 rounded-lg px-3 py-2 min-w-[60px]">
+                <span class="text-2xl font-bold tabular-nums">35</span>
+                <span class="text-[10px] uppercase opacity-80">min</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="max-w-3xl mx-auto px-4 py-6 md:py-8 pb-32">
+    <div class="mb-6">
+      <h2 class="font-display text-2xl font-bold text-gray-900 mb-1">Seus palpites</h2>
+      <p class="text-sm text-gray-600">Selecione um resultado para cada jogo da rodada.</p>
+      <div class="mt-3 flex items-center gap-2">
+        <div class="flex-1 h-2 bg-gray-200 rounded-full overflow-hidden">
+          <div class="h-full bg-brasil-verde" style="width: 60%"></div>
+        </div>
+        <span class="text-sm font-semibold text-gray-700 tabular-nums">3/5</span>
+      </div>
+    </div>
+
+    <div class="space-y-3">
+      <!-- Jogo 1 -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="px-4 py-3 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Jogo 1</span>
+          <span class="text-xs text-gray-500">20/07 16:00</span>
+        </div>
+        <div class="px-4 py-4 grid grid-cols-3 items-center gap-2">
+          <div class="flex flex-col items-center text-center">
+            <div class="h-12 w-12 rounded-full bg-red-600 flex items-center justify-center text-white font-bold text-sm mb-1">FLA</div>
+            <span class="text-sm font-semibold text-gray-900">Flamengo</span>
+          </div>
+          <div class="text-center"><span class="text-gray-400 font-bold text-lg">×</span></div>
+          <div class="flex flex-col items-center text-center">
+            <div class="h-12 w-12 rounded-full bg-green-600 flex items-center justify-center text-white font-bold text-sm mb-1">PAL</div>
+            <span class="text-sm font-semibold text-gray-900">Palmeiras</span>
+          </div>
+        </div>
+        <div class="px-4 pb-4 grid grid-cols-3 gap-2">
+          <button class="palpite-ativo flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 font-bold transition-all">
+            <span class="text-sm">CASA</span>
+            <span class="text-[10px] font-normal mt-0.5 text-white/80">vitória mandante</span>
+          </button>
+          <button class="flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 bg-white text-gray-700 border-gray-200 hover:border-brasil-verde font-bold transition-all">
+            <span class="text-sm">EMPATE</span>
+            <span class="text-[10px] font-normal mt-0.5 text-gray-500">sem vencedor</span>
+          </button>
+          <button class="flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 bg-white text-gray-700 border-gray-200 hover:border-brasil-verde font-bold transition-all">
+            <span class="text-sm">FORA</span>
+            <span class="text-[10px] font-normal mt-0.5 text-gray-500">vitória visitante</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Jogo 2 -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="px-4 py-3 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Jogo 2</span>
+          <span class="text-xs text-gray-500">20/07 18:30</span>
+        </div>
+        <div class="px-4 py-4 grid grid-cols-3 items-center gap-2">
+          <div class="flex flex-col items-center text-center">
+            <div class="h-12 w-12 rounded-full bg-blue-600 flex items-center justify-center text-white font-bold text-sm mb-1">CRU</div>
+            <span class="text-sm font-semibold text-gray-900">Cruzeiro</span>
+          </div>
+          <div class="text-center"><span class="text-gray-400 font-bold text-lg">×</span></div>
+          <div class="flex flex-col items-center text-center">
+            <div class="h-12 w-12 rounded-full bg-gray-900 flex items-center justify-center text-white font-bold text-sm mb-1">BOT</div>
+            <span class="text-sm font-semibold text-gray-900">Botafogo</span>
+          </div>
+        </div>
+        <div class="px-4 pb-4 grid grid-cols-3 gap-2">
+          <button class="flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 bg-white text-gray-700 border-gray-200 hover:border-brasil-verde font-bold transition-all">
+            <span class="text-sm">CASA</span>
+            <span class="text-[10px] font-normal mt-0.5 text-gray-500">vitória mandante</span>
+          </button>
+          <button class="palpite-ativo flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 font-bold transition-all">
+            <span class="text-sm">EMPATE</span>
+            <span class="text-[10px] font-normal mt-0.5 text-white/80">sem vencedor</span>
+          </button>
+          <button class="flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 bg-white text-gray-700 border-gray-200 hover:border-brasil-verde font-bold transition-all">
+            <span class="text-sm">FORA</span>
+            <span class="text-[10px] font-normal mt-0.5 text-gray-500">vitória visitante</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Jogo 3 -->
+      <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+        <div class="px-4 py-3 bg-gray-50 border-b border-gray-100 flex items-center justify-between">
+          <span class="text-xs font-bold text-gray-500 uppercase tracking-wider">Jogo 3</span>
+          <span class="text-xs text-gray-500">21/07 16:00</span>
+        </div>
+        <div class="px-4 py-4 grid grid-cols-3 items-center gap-2">
+          <div class="flex flex-col items-center text-center">
+            <div class="h-12 w-12 rounded-full bg-red-700 flex items-center justify-center text-white font-bold text-sm mb-1">INT</div>
+            <span class="text-sm font-semibold text-gray-900">Internacional</span>
+          </div>
+          <div class="text-center"><span class="text-gray-400 font-bold text-lg">×</span></div>
+          <div class="flex flex-col items-center text-center">
+            <div class="h-12 w-12 rounded-full bg-blue-800 flex items-center justify-center text-white font-bold text-sm mb-1">GRE</div>
+            <span class="text-sm font-semibold text-gray-900">Grêmio</span>
+          </div>
+        </div>
+        <div class="px-4 pb-4 grid grid-cols-3 gap-2">
+          <button class="flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 bg-white text-gray-700 border-gray-200 hover:border-brasil-verde font-bold transition-all">
+            <span class="text-sm">CASA</span>
+            <span class="text-[10px] font-normal mt-0.5 text-gray-500">vitória mandante</span>
+          </button>
+          <button class="flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 bg-white text-gray-700 border-gray-200 hover:border-brasil-verde font-bold transition-all">
+            <span class="text-sm">EMPATE</span>
+            <span class="text-[10px] font-normal mt-0.5 text-gray-500">sem vencedor</span>
+          </button>
+          <button class="palpite-ativo flex flex-col items-center justify-center px-2 py-3 rounded-lg border-2 font-bold transition-all">
+            <span class="text-sm">FORA</span>
+            <span class="text-[10px] font-normal mt-0.5 text-white/80">vitória visitante</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="text-center text-sm text-gray-400 py-3">+ mais 2 jogos abaixo...</div>
+    </div>
+
+    <!-- Dados do apostador -->
+    <div class="mt-8 bg-white rounded-xl shadow-sm border border-gray-200 p-5">
+      <h2 class="font-display text-xl font-bold text-gray-900 mb-4">Seus dados</h2>
+      <div class="space-y-3">
+        <div>
+          <label class="block mb-1.5 text-sm font-medium text-gray-700">Nome completo <span class="text-red-500">*</span></label>
+          <input type="text" placeholder="João da Silva" class="block w-full rounded-lg border border-gray-300 bg-white px-3.5 py-2.5">
+        </div>
+        <div>
+          <label class="block mb-1.5 text-sm font-medium text-gray-700">E-mail <span class="text-red-500">*</span></label>
+          <input type="email" placeholder="seu@email.com" class="block w-full rounded-lg border border-gray-300 bg-white px-3.5 py-2.5">
+        </div>
+        <div>
+          <label class="block mb-1.5 text-sm font-medium text-gray-700">WhatsApp / Telefone</label>
+          <input type="tel" placeholder="(11) 99999-9999" class="block w-full rounded-lg border border-gray-300 bg-white px-3.5 py-2.5">
+          <p class="mt-1 text-sm text-gray-500">Opcional — usado para contato sobre o pagamento</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barra fixa -->
+  <div class="fixed bottom-0 inset-x-0 bg-white border-t border-gray-200 shadow-2xl z-30">
+    <div class="max-w-3xl mx-auto px-4 py-3 flex items-center gap-3">
+      <div class="flex-1">
+        <div class="text-xs text-gray-500 uppercase font-bold">Total</div>
+        <div class="text-lg font-bold text-gray-900">R$ 20,00</div>
+      </div>
+      <button class="inline-flex items-center justify-center gap-2 bg-brasil-verde hover:bg-brasil-verde-escuro text-white font-semibold h-14 px-7 rounded-lg flex-1 max-w-xs">
+        ✈️ Registrar meu palpite
+      </button>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 2: COMPROVANTE DE COTA                                    -->
+<!-- ============================================================ -->
+<div id="view-cota" class="hidden">
+<main class="min-h-screen bg-gray-100 py-6">
+  <div class="max-w-2xl mx-auto px-4">
+    <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+      <div class="bg-gradient-to-br from-brasil-verde to-brasil-verde-escuro text-white p-6">
+        <div class="text-xs uppercase tracking-wider opacity-80 mb-1">Comprovante de cota</div>
+        <div class="text-4xl font-bold tabular-nums">B15-00042</div>
+        <div class="mt-2 text-sm opacity-90">Bolão Rodada 15 — Brasileirão 2025</div>
+        <div class="text-xs opacity-75 mt-0.5">Rodada 15</div>
+      </div>
+
+      <div class="px-6 py-4 border-b border-gray-100 flex items-center gap-3 text-amber-700">
+        ⏳ <span class="font-semibold">Pagamento pendente</span>
+        <span class="ml-auto inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">pendente</span>
+      </div>
+
+      <div class="bg-amber-50 border-y-2 border-amber-300 px-6 py-4">
+        <h3 class="font-bold text-amber-900 mb-2">💳 Instruções de pagamento</h3>
+        <div class="space-y-1 text-sm text-amber-900">
+          <p>Faça um Pix de <strong>R$ 20,00</strong> para confirmar sua cota:</p>
+          <p>Chave Pix: <strong class="font-mono">seu-pix@email.com</strong></p>
+          <p>Favorecido: <strong>Seu Nome Completo</strong></p>
+        </div>
+      </div>
+
+      <div class="p-6 grid grid-cols-2 gap-4 text-sm border-b border-gray-100">
+        <div>
+          <div class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Apostador</div>
+          <div class="font-semibold text-gray-900">João da Silva</div>
+        </div>
+        <div>
+          <div class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Valor</div>
+          <div class="font-semibold text-gray-900">R$ 20,00</div>
+        </div>
+        <div>
+          <div class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">E-mail</div>
+          <div class="font-semibold text-gray-900 text-xs break-all">joao@email.com</div>
+        </div>
+        <div>
+          <div class="text-gray-500 text-[10px] uppercase font-bold tracking-wider">Registrado em</div>
+          <div class="font-semibold text-gray-900 text-xs">13/05/2026 14:30</div>
+        </div>
+      </div>
+
+      <div class="p-6">
+        <h2 class="font-bold text-gray-900 mb-3">Seus palpites</h2>
+        <div class="border border-gray-200 rounded-lg overflow-hidden">
+          <div class="flex items-center justify-between px-3 py-3 text-sm bg-white border-b">
+            <span class="text-gray-700"><span class="text-gray-400 mr-1.5">1.</span>Flamengo × Palmeiras</span>
+            <span class="font-bold text-gray-700">Casa</span>
+          </div>
+          <div class="flex items-center justify-between px-3 py-3 text-sm bg-gray-50 border-b">
+            <span class="text-gray-700"><span class="text-gray-400 mr-1.5">2.</span>Cruzeiro × Botafogo</span>
+            <span class="font-bold text-gray-700">Empate</span>
+          </div>
+          <div class="flex items-center justify-between px-3 py-3 text-sm bg-white border-b">
+            <span class="text-gray-700"><span class="text-gray-400 mr-1.5">3.</span>Internacional × Grêmio</span>
+            <span class="font-bold text-gray-700">Fora</span>
+          </div>
+          <div class="flex items-center justify-between px-3 py-3 text-sm bg-gray-50 border-b">
+            <span class="text-gray-700"><span class="text-gray-400 mr-1.5">4.</span>São Paulo × Corinthians</span>
+            <span class="font-bold text-gray-700">Casa</span>
+          </div>
+          <div class="flex items-center justify-between px-3 py-3 text-sm bg-white">
+            <span class="text-gray-700"><span class="text-gray-400 mr-1.5">5.</span>Atlético-MG × Fluminense</span>
+            <span class="font-bold text-gray-700">Empate</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="p-6 pt-0 grid grid-cols-2 gap-2">
+        <button class="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg border-2 border-brasil-verde text-brasil-verde hover:bg-brasil-verde hover:text-white font-semibold transition">⬇ Baixar PDF</button>
+        <button class="inline-flex items-center justify-center gap-2 h-11 px-5 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white font-semibold transition">💬 Contato</button>
+      </div>
+    </div>
+    <p class="text-center text-xs text-gray-500 mt-4">BolãoPro · Bolão Rodada 15 — Brasileirão 2025</p>
+  </div>
+</main>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 3: DASHBOARD ADMIN                                        -->
+<!-- ============================================================ -->
+<div id="view-admin" class="hidden">
+<main class="min-h-screen bg-admin-bg flex text-white">
+  <!-- Sidebar -->
+  <aside class="w-64 bg-admin-surface border-r border-admin-border flex-shrink-0 hidden md:flex flex-col">
+    <div class="flex items-center gap-2 p-5 border-b border-admin-border">
+      <div class="w-9 h-9 rounded-lg bg-brasil-verde flex items-center justify-center text-xl">🏆</div>
+      <div>
+        <div class="font-display font-bold text-white text-lg leading-tight">BolãoPro</div>
+        <div class="text-[10px] text-gray-500 uppercase tracking-wider">Admin</div>
+      </div>
+    </div>
+    <button class="mx-4 mt-4 inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-brasil-verde hover:bg-brasil-verde-escuro text-white font-semibold rounded-lg transition">
+      + Novo bolão
+    </button>
+    <nav class="flex-1 px-3 py-4 space-y-1">
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium bg-brasil-verde/20 text-brasil-verde-claro">
+        📊 Dashboard
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-admin-border/50">
+        🏆 Bolões
+      </a>
+      <a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-admin-border/50">
+        👥 Apostadores
+      </a>
+    </nav>
+    <div class="p-4 border-t border-admin-border">
+      <button class="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium text-gray-400 hover:text-white hover:bg-admin-border/50">
+        🚪 Sair
+      </button>
+    </div>
+  </aside>
+
+  <main class="flex-1 p-6 lg:p-8">
+    <div class="max-w-6xl mx-auto">
+      <div class="mb-8">
+        <h1 class="font-display text-3xl font-bold">Dashboard</h1>
+        <p class="text-gray-400 text-sm mt-1">Visão geral dos seus bolões</p>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+        <div class="bg-admin-surface border border-admin-border rounded-xl p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div class="text-xs text-gray-400 uppercase font-semibold tracking-wider">Bolões ativos</div>
+            <div class="p-2 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 text-emerald-400 border border-emerald-500/30">🏆</div>
+          </div>
+          <div class="text-3xl font-bold tabular-nums">3</div>
+        </div>
+        <div class="bg-admin-surface border border-admin-border rounded-xl p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div class="text-xs text-gray-400 uppercase font-semibold tracking-wider">Apostas (24h)</div>
+            <div class="p-2 rounded-lg bg-gradient-to-br from-amber-500/20 to-amber-500/5 text-amber-400 border border-amber-500/30">🎟</div>
+          </div>
+          <div class="text-3xl font-bold tabular-nums">47</div>
+        </div>
+        <div class="bg-admin-surface border border-admin-border rounded-xl p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div class="text-xs text-gray-400 uppercase font-semibold tracking-wider">Arrecadado</div>
+            <div class="p-2 rounded-lg bg-gradient-to-br from-emerald-500/20 to-emerald-500/5 text-emerald-400 border border-emerald-500/30">💰</div>
+          </div>
+          <div class="text-3xl font-bold tabular-nums">R$ 2.840</div>
+          <div class="text-xs text-gray-500 mt-1">apenas confirmadas</div>
+        </div>
+        <div class="bg-admin-surface border border-admin-border rounded-xl p-5">
+          <div class="flex items-start justify-between mb-3">
+            <div class="text-xs text-gray-400 uppercase font-semibold tracking-wider">Apostadores</div>
+            <div class="p-2 rounded-lg bg-gradient-to-br from-blue-500/20 to-blue-500/5 text-blue-400 border border-blue-500/30">👥</div>
+          </div>
+          <div class="text-3xl font-bold tabular-nums">142</div>
+          <div class="text-xs text-gray-500 mt-1">únicos por e-mail</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div class="lg:col-span-2 bg-admin-surface border border-admin-border rounded-xl p-5">
+          <h2 class="font-bold mb-4">Apostas por bolão</h2>
+          <div class="space-y-3">
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-gray-300 truncate flex-1 pr-2">Bolão Rodada 15 — Brasileirão 2025</span>
+                <span class="font-bold tabular-nums">47</span>
+              </div>
+              <div class="h-2 bg-admin-bg rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-brasil-verde to-brasil-verde-claro" style="width: 100%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-gray-300 truncate flex-1 pr-2">Bolão Rodada 14</span>
+                <span class="font-bold tabular-nums">38</span>
+              </div>
+              <div class="h-2 bg-admin-bg rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-brasil-verde to-brasil-verde-claro" style="width: 81%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-gray-300 truncate flex-1 pr-2">Bolão Rodada 13</span>
+                <span class="font-bold tabular-nums">29</span>
+              </div>
+              <div class="h-2 bg-admin-bg rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-brasil-verde to-brasil-verde-claro" style="width: 62%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex items-center justify-between text-sm mb-1">
+                <span class="text-gray-300 truncate flex-1 pr-2">Bolão Rodada 12</span>
+                <span class="font-bold tabular-nums">21</span>
+              </div>
+              <div class="h-2 bg-admin-bg rounded-full overflow-hidden">
+                <div class="h-full bg-gradient-to-r from-brasil-verde to-brasil-verde-claro" style="width: 45%"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-admin-surface border border-admin-border rounded-xl p-5">
+          <h2 class="font-bold mb-4">Últimas apostas</h2>
+          <div class="space-y-2.5">
+            <div class="flex items-center justify-between gap-2 text-sm">
+              <div class="min-w-0 flex-1">
+                <div class="font-semibold truncate">João da Silva</div>
+                <div class="text-xs text-gray-500 truncate">B15-00042 · 13/05 14:30</div>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">⏳</span>
+            </div>
+            <div class="flex items-center justify-between gap-2 text-sm">
+              <div class="min-w-0 flex-1">
+                <div class="font-semibold truncate">Maria Santos</div>
+                <div class="text-xs text-gray-500 truncate">B15-00041 · 13/05 14:18</div>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">✓</span>
+            </div>
+            <div class="flex items-center justify-between gap-2 text-sm">
+              <div class="min-w-0 flex-1">
+                <div class="font-semibold truncate">Pedro Costa</div>
+                <div class="text-xs text-gray-500 truncate">B15-00040 · 13/05 13:55</div>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">✓</span>
+            </div>
+            <div class="flex items-center justify-between gap-2 text-sm">
+              <div class="min-w-0 flex-1">
+                <div class="font-semibold truncate">Ana Oliveira</div>
+                <div class="text-xs text-gray-500 truncate">B15-00039 · 13/05 13:42</div>
+              </div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">⏳</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</main>
+</div>
+
+<!-- ============================================================ -->
+<!-- TAB 4: TABELA DE APOSTAS                                       -->
+<!-- ============================================================ -->
+<div id="view-apostas" class="hidden">
+<main class="min-h-screen bg-admin-bg text-white p-6 lg:p-8">
+  <div class="max-w-7xl mx-auto">
+    <a class="inline-flex items-center gap-1 text-sm text-gray-400 hover:text-white mb-3">← Voltar</a>
+    <div class="flex flex-wrap items-start justify-between gap-3 mb-6">
+      <div>
+        <div class="flex items-center gap-2 mb-1">
+          <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">Aberto</span>
+          <span class="text-xs text-gray-500">Rodada 15</span>
+        </div>
+        <h1 class="font-display text-3xl font-bold">Bolão Rodada 15 — Brasileirão 2025</h1>
+        <div class="text-sm text-gray-400 mt-1">47 apostas · 32 confirmadas · <strong class="text-emerald-400">R$ 640,00</strong> arrecadado</div>
+      </div>
+    </div>
+
+    <div class="bg-admin-surface border border-admin-border rounded-xl p-4 mb-4">
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex-1 min-w-[200px] relative">
+          <input type="text" placeholder="🔍 Buscar por nome, cota ou e-mail..." class="w-full h-10 pl-9 pr-3 bg-admin-bg border border-admin-border rounded-lg text-white placeholder:text-gray-500">
+        </div>
+        <select class="h-10 px-3 bg-admin-bg border border-admin-border rounded-lg text-white text-sm">
+          <option>Todos os status</option>
+        </select>
+        <div class="flex items-center gap-2 ml-auto">
+          <button class="inline-flex items-center gap-2 h-9 px-3 bg-brasil-amarelo hover:bg-brasil-amarelo-escuro text-gray-900 text-sm font-semibold rounded-lg">📝 Inserir resultados</button>
+          <button class="inline-flex items-center gap-2 h-9 px-3 bg-brasil-verde hover:bg-brasil-verde-escuro text-white text-sm font-semibold rounded-lg">🏆 Apurar ganhador</button>
+        </div>
+      </div>
+      <div class="flex items-center gap-4 mt-3 pt-3 border-t border-admin-border text-xs text-gray-400">
+        <span>Total: <strong class="text-white">47</strong></span>
+        <span>Confirmadas: <strong class="text-emerald-400">32</strong></span>
+        <span>Pendentes: <strong class="text-amber-400">15</strong></span>
+      </div>
+    </div>
+
+    <div class="bg-admin-surface border border-admin-border rounded-xl overflow-hidden">
+      <table class="w-full text-sm">
+        <thead>
+          <tr class="text-left text-xs text-gray-400 uppercase tracking-wider border-b border-admin-border">
+            <th class="px-4 py-3">Cota</th>
+            <th class="px-4 py-3">Apostador</th>
+            <th class="px-4 py-3">Contato</th>
+            <th class="px-4 py-3">Pagamento</th>
+            <th class="px-4 py-3">Acertos</th>
+            <th class="px-4 py-3">Data</th>
+            <th class="px-4 py-3 text-right">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="border-b border-admin-border/50 hover:bg-admin-bg/50">
+            <td class="px-4 py-3 font-mono text-xs">B15-00042</td>
+            <td class="px-4 py-3"><div class="font-semibold">João da Silva</div></td>
+            <td class="px-4 py-3 text-gray-300 text-xs">
+              <div>joao@email.com</div>
+              <div class="text-gray-500">(11) 99999-9999</div>
+            </td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-100 text-amber-800">⏳ Pendente</span></td>
+            <td class="px-4 py-3 tabular-nums">—</td>
+            <td class="px-4 py-3 text-gray-400 text-xs">13/05/2026 14:30</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <button class="p-2 rounded hover:bg-admin-border text-gray-300">👁</button>
+                <button class="p-2 rounded hover:bg-emerald-500/20 text-emerald-400">✓</button>
+                <button class="p-2 rounded hover:bg-red-500/20 text-red-400">✗</button>
+                <button class="p-2 rounded hover:bg-admin-border text-gray-300">⬇</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border-b border-admin-border/50 hover:bg-admin-bg/50">
+            <td class="px-4 py-3 font-mono text-xs">B15-00041</td>
+            <td class="px-4 py-3">
+              <div class="font-semibold">Maria Santos</div>
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800 mt-0.5">🏆 Ganhador</span>
+            </td>
+            <td class="px-4 py-3 text-gray-300 text-xs">
+              <div>maria@email.com</div>
+              <div class="text-gray-500">(21) 98888-7777</div>
+            </td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">✓ Confirmado</span></td>
+            <td class="px-4 py-3 text-white font-bold tabular-nums">10/10</td>
+            <td class="px-4 py-3 text-gray-400 text-xs">13/05/2026 14:18</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <button class="p-2 rounded hover:bg-admin-border text-gray-300">👁</button>
+                <button class="p-2 rounded hover:bg-red-500/20 text-red-400">✗</button>
+                <button class="p-2 rounded hover:bg-admin-border text-gray-300">⬇</button>
+              </div>
+            </td>
+          </tr>
+          <tr class="border-b border-admin-border/50 hover:bg-admin-bg/50">
+            <td class="px-4 py-3 font-mono text-xs">B15-00040</td>
+            <td class="px-4 py-3"><div class="font-semibold">Pedro Costa</div></td>
+            <td class="px-4 py-3 text-gray-300 text-xs">
+              <div>pedro@email.com</div>
+            </td>
+            <td class="px-4 py-3"><span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-100 text-emerald-800">✓ Confirmado</span></td>
+            <td class="px-4 py-3 tabular-nums">8/10</td>
+            <td class="px-4 py-3 text-gray-400 text-xs">13/05/2026 13:55</td>
+            <td class="px-4 py-3">
+              <div class="flex items-center justify-end gap-1">
+                <button class="p-2 rounded hover:bg-admin-border text-gray-300">👁</button>
+                <button class="p-2 rounded hover:bg-red-500/20 text-red-400">✗</button>
+                <button class="p-2 rounded hover:bg-admin-border text-gray-300">⬇</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
+</div>
+
+<script>
+function showTab(name) {
+  ['publica','cota','admin','apostas'].forEach(n => {
+    document.getElementById('view-' + n).classList.add('hidden');
+    document.getElementById('tab-' + n).classList.remove('tab-active');
+    document.getElementById('tab-' + n).classList.add('text-gray-500');
+  });
+  document.getElementById('view-' + name).classList.remove('hidden');
+  document.getElementById('tab-' + name).classList.add('tab-active');
+  document.getElementById('tab-' + name).classList.remove('text-gray-500');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+</script>
+
+</body>
+</html>
