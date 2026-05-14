@@ -153,6 +153,86 @@ export interface CriarApostaResponse {
   link_cota: string;
 }
 
+// ============================================================
+// PLACAR EXATO (jogos do dia)
+// ============================================================
+
+export interface Placar {
+  id: string;
+  slug: string;
+  titulo: string;
+  time_casa: string;
+  time_fora: string;
+  escudo_casa: string | null;
+  escudo_fora: string | null;
+  data_jogo: string | null;
+  premio_acumulado: number;
+  valor_cota: number;
+  status: StatusBolao;
+  link_checkout: string | null;
+  descricao: string | null;
+  regras: string | null;
+  gols_casa: number | null;
+  gols_fora: number | null;
+  criado_em: string;
+  atualizado_em: string;
+}
+
+export interface PalpitePlacar {
+  id: string;
+  placar_id: string;
+  numero_cota: string;
+  nome_apostador: string;
+  email_apostador: string;
+  telefone_apostador: string | null;
+  gols_casa_palpite: number;
+  gols_fora_palpite: number;
+  status_pagamento: StatusPagamento;
+  ganhador: boolean;
+  criado_em: string;
+  atualizado_em: string;
+}
+
+export interface CriarPlacarInput {
+  titulo: string;
+  time_casa: string;
+  time_fora: string;
+  escudo_casa?: string | null;
+  escudo_fora?: string | null;
+  data_jogo?: string | null;
+  premio_acumulado: number;
+  valor_cota: number;
+  link_checkout?: string | null;
+  descricao?: string | null;
+  regras?: string | null;
+}
+
+export interface AtualizarPlacarInput {
+  titulo?: string;
+  time_casa?: string;
+  time_fora?: string;
+  escudo_casa?: string | null;
+  escudo_fora?: string | null;
+  data_jogo?: string | null;
+  premio_acumulado?: number;
+  valor_cota?: number;
+  status?: StatusBolao;
+  link_checkout?: string | null;
+  descricao?: string | null;
+  regras?: string | null;
+  gols_casa?: number | null;
+  gols_fora?: number | null;
+}
+
+export interface CriarPalpitePlacarInput {
+  placar_id: string;
+  nome_apostador: string;
+  email_apostador: string;
+  telefone_apostador?: string | null;
+  gols_casa_palpite: number;
+  gols_fora_palpite: number;
+}
+
 // ------------------------------------------------------------
 // Dashboard stats
 // ------------------------------------------------------------

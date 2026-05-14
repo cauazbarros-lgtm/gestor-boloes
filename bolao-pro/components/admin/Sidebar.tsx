@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
-import { LayoutDashboard, Trophy, Users, LogOut, Plus, Menu, X } from 'lucide-react';
+import { LayoutDashboard, Trophy, Users, LogOut, Plus, Menu, X, Target } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
 import { createClient } from '@/lib/supabase/client';
@@ -10,6 +10,7 @@ import { createClient } from '@/lib/supabase/client';
 const links = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/boloes', label: 'Bolões', icon: Trophy },
+  { href: '/admin/placares', label: 'Placar Exato', icon: Target },
   { href: '/admin/apostadores', label: 'Apostadores', icon: Users },
 ];
 
