@@ -70,6 +70,7 @@ export async function POST(req: NextRequest) {
       data_limite: body.data_limite ?? null,
       descricao: body.descricao ?? null,
       regras: body.regras ?? null,
+      link_checkout: body.link_checkout ?? null,
       status: 'aberto',
     })
     .select()

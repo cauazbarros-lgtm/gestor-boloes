@@ -78,6 +78,25 @@ function FormularioInterno({ bolao }: Props) {
       if (!res.ok || !data.sucesso) {
         throw new Error(data.erro ?? 'Erro ao registrar aposta');
       }
+
+      // Se o bolão tem link de checkout configurado, redireciona pra lá
+      if (bolao.link_checkout) {
+        toast.show('Palpite registrado! Redirecionando pro checkout...', 'success');
+        const url = new URL(bolao.link_checkout);
+        url.searchParams.set('aposta_id', data.aposta_id);
+        url.searchParams.set('cota', data.numero_cota);
+        url.searchParams.set('nome', nome);
+        url.searchParams.set('email', email);
+        if (telefone) url.searchParams.set('telefone', telefone);
+        url.searchParams.set('valor', String(bolao.valor_cota));
+        url.searchParams.set('bolao', bolao.titulo);
+        // Pequeno delay pra o toast aparecer antes do redirect
+        setTimeout(() => {
+          window.location.href = url.toString();
+        }, 800);
+        return;
+      }
+
       setResultado({
         numero_cota: data.numero_cota,
         aposta_id: data.aposta_id,

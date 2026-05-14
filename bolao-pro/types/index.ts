@@ -22,6 +22,7 @@ export interface Bolao {
   data_limite: string | null; // ISO timestamp
   descricao: string | null;
   regras: string | null;
+  link_checkout: string | null; // URL externa de checkout (opcional)
   criado_em: string;
   atualizado_em: string;
 }
@@ -106,6 +107,7 @@ export interface CriarBolaoInput {
   data_limite?: string | null;
   descricao?: string | null;
   regras?: string | null;
+  link_checkout?: string | null;
   jogos: JogoInput[];
 }
 
@@ -117,6 +119,7 @@ export interface AtualizarBolaoInput {
   data_limite?: string | null;
   descricao?: string | null;
   regras?: string | null;
+  link_checkout?: string | null;
   status?: StatusBolao;
   jogos?: JogoInput[];
 }

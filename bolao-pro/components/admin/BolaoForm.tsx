@@ -28,6 +28,7 @@ export function BolaoForm({ bolao }: Props) {
   );
   const [descricao, setDescricao] = useState(bolao?.descricao ?? '');
   const [regras, setRegras] = useState(bolao?.regras ?? '');
+  const [linkCheckout, setLinkCheckout] = useState(bolao?.link_checkout ?? '');
   const [status, setStatus] = useState<StatusBolao>(bolao?.status ?? 'aberto');
   const [jogos, setJogos] = useState<JogoInput[]>(
     bolao?.jogos?.map((j) => ({
@@ -63,6 +64,7 @@ export function BolaoForm({ bolao }: Props) {
         data_limite: dataLimite ? new Date(dataLimite).toISOString() : null,
         descricao,
         regras,
+        link_checkout: linkCheckout?.trim() || null,
         status,
         jogos,
       };
@@ -164,6 +166,16 @@ export function BolaoForm({ bolao }: Props) {
             </div>
           )}
         </div>
+
+        <Input
+          label="Link do checkout (opcional)"
+          type="url"
+          value={linkCheckout ?? ''}
+          onChange={(e) => setLinkCheckout(e.target.value)}
+          placeholder="https://safeflowapp.com/seu-checkout"
+          hint="Quando preenchido, o botão 'Registrar meu palpite' redireciona o apostador pra essa URL após salvar o palpite. Deixe vazio pra usar o modal padrão."
+          className="bg-admin-bg border-admin-border text-white placeholder:text-gray-500"
+        />
 
         <Textarea
           label="Descrição (opcional)"

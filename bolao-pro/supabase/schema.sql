@@ -19,9 +19,13 @@ CREATE TABLE IF NOT EXISTS boloes (
   data_limite TIMESTAMP WITH TIME ZONE,
   descricao TEXT,
   regras TEXT,
+  link_checkout TEXT,
   criado_em TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
   atualizado_em TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
+
+-- Migração idempotente para projetos existentes que ainda não têm a coluna
+ALTER TABLE boloes ADD COLUMN IF NOT EXISTS link_checkout TEXT;
 
 -- ------------------------------------------------------------
 -- TABELA: jogos
